@@ -1,10 +1,10 @@
 /*
 ** EPITECH PROJECT, 2020
-** my_put-nbr
+** my_put_nbr.c
 ** File description:
 ** 
 */
-#include "my.h"
+#include "my.prototypes.h"
 
 void print_intmin(void)
 {

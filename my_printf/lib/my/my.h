@@ -7,7 +7,6 @@
 
 void my_putchar(char c);
 int my_isneg(int nb);
-int my_put_nbr(int nb);
 void my_swap(int *a, int *b);
 int my_putstr(char const *str);
 int my_strlen(char const *str);
@@ -35,3 +34,6 @@ int my_showstr(char const *str);
 int my_showmem(char const *str, int size);
 char *my_strcat(char *dest, char const *src);
 char *my_strncat(char *dest, char const *src, int nb);
+char **my_str_to_wordtab(char *str, char *delim);
+int my_find(char *str, char c);
+char *my_strdup(char *str);
