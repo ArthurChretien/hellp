@@ -19,7 +19,7 @@ LDFLAGS	=
 
 NAME	=	101pong
 
-SRCS	=	main.c
+SRCS	=	pong.c
 
 OBJS	=	$(SRCS:.c=.o)
 
