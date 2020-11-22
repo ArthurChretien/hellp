@@ -73,33 +73,30 @@ int get_ymax(char *dest)
     return (my_getnbr(temp));
 }
 
-struct s_list get_tab(char *dest)
+int **get_tab(struct s_list data, char *dest)
 {
-    struct s_list data;
     int y = 0;
     int x = 0;
     int n = 0;
-
-    data.x_max = get_xmax(dest);
-    data.y_max = get_ymax(dest);
-    data.tab = malloc(sizeof(int *) * data.y_max);
-    data.tab[y] = malloc(sizeof(int) * data.x_max);
-    for (; dest[n] != '\n' && dest[n] != '\0'; n++)
-        ;
+    
+    data.tab = malloc(sizeof(int *) * (data.y_max + 1));
+    data.tab[y] = malloc(sizeof(int) * (data.x_max + 1));
+    while (dest[n] != '\n' && dest[n] != '\0')
+        n++;
     n++;
-    for (; dest[n] != '\0'; n++)
+    for(; dest[n] != '\0'; n++)
     {
         if (dest[n] == '\n') {
             y++;
             x = 0;
-            data.tab[y] = malloc(sizeof(int) * data.x_max);
+            data.tab[y] = malloc(sizeof(int) * (data.x_max + 1));
         }
         else if (dest[n] == '.')
             data.tab[y][x++] = 1;
         else
             data.tab[y][x++] = 0;
     }
-    return (data);
+    return (data.tab);
 }
 
 int my_find_min(int up, int left, int upleft)
@@ -139,8 +136,7 @@ int **replace_by_neg(struct s_list data, int res)
         for (;x < data.x_max; x++) {
             if (data.tab[y][x] == res) {
                 return (replace_by_neg_bis(data, res, x, y));
-            }
-                
+            }                
         }
     }
     return (data.tab);
@@ -162,15 +158,27 @@ int  **my_find_bsq(struct s_list data)
                 res = data.tab[y][x];
         }
     }
+    //tmp_aff(data);
     data.tab = replace_by_neg(data, res);
     return (data.tab);
 }
 
 int bsq(char *dest)
 {
-    struct s_list data = get_tab(dest);
+    struct s_list data;
+
+    data.x_max = get_xmax(dest);
+    data.y_max = get_ymax(dest);
+    data.tab = get_tab(data, dest);
     data.tab = my_find_bsq(data);
     display_tab(data);
+    
+    int y = 0; 
+    while (y != data.y_max) {
+        free(data.tab[y]);
+        y++;
+    }
+    free(data.tab);
     return (0);
 }
 
