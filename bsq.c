@@ -10,7 +10,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "proto.h"
-#include <stdio.h>
 
 struct s_list {
     int y_max;
@@ -78,26 +77,27 @@ struct s_list get_tab(char *dest)
 {
     struct s_list data;
     int y = 0;
-    int n = 0;
     int x = 0;
+    int n = 0;
 
     data.x_max = get_xmax(dest);
     data.y_max = get_ymax(dest);
     data.tab = malloc(sizeof(int *) * data.y_max);
     data.tab[y] = malloc(sizeof(int) * data.x_max);
-    while (dest[n] != '\0') {
+    for (; dest[n] != '\n' && dest[n] != '\0'; n++)
+        ;
+    n++;
+    for (; dest[n] != '\0'; n++)
+    {
         if (dest[n] == '\n') {
             y++;
             x = 0;
             data.tab[y] = malloc(sizeof(int) * data.x_max);
         }
-        else if (dest[n] == '.') {
+        else if (dest[n] == '.')
             data.tab[y][x++] = 1;
-        }
-        else {
+        else
             data.tab[y][x++] = 0;
-        }
-        n++;
     }
     return (data);
 }
@@ -115,72 +115,61 @@ int my_find_min(int up, int left, int upleft)
     return (min);
 }
 
-struct s_list replace_by_neg_bis(struct s_list data, int res, int x, int y)
+int **replace_by_neg_bis(struct s_list data, int res, int x, int y)
 {
     int j = y - (res - 1);
     int i = x - (res - 1);
 
-    for (; j < y; j++) {
+    for (; j <= y; j++) {
         i = x - (res - 1);
-        for (; i < x; i++) {
+        for (; i <= x; i++) {
             data.tab[j][i] = -1;
         }
     }
-    return (data);
+    return (data.tab);
 }
 
-struct s_list replace_by_neg(struct s_list data, int res)
+int **replace_by_neg(struct s_list data, int res)
 {
     int x = 0;
     int y = 0;
 
     for (;y < data.y_max; y++) {
+        x = 0;
         for (;x < data.x_max; x++) {
-            if (data.tab[y][x] == res)
-                data = replace_by_neg_bis(data, res, x, y);
+            if (data.tab[y][x] == res) {
+                return (replace_by_neg_bis(data, res, x, y));
+            }
+                
         }
     }
-    return (data);
+    return (data.tab);
 }
 
-int get_specific_case(int **tab, int x, int y)
-{
-    int cell;
-
-    if (x == 0)
-        cell = 1 + tab[y - 1][x];
-    else if (y == 0)
-        cell = 1 + tab[y][x - 1];
-    else
-        cell = 1 + my_find_min(tab[y][x - 1], tab[y - 1][x], tab[y - 1][x - 1]);
-    return (cell);
-}
-
-struct s_list my_find_bsq(struct s_list data)
+int  **my_find_bsq(struct s_list data)
 {
     int x = 0;
     int y = 0;
     int res = 0;
 
     for (;y < data.y_max; y++) {
+        x = 0;
         for (;x < data.x_max; x++) {
-            if (data.tab[y][x] > 0 && (x != 0 || y != 0))
-                data.tab[y][x] = get_specific_case(data.tab, x, y);
+            if (data.tab[y][x] > 0 && x != 0 && y != 0) {
+                data.tab[y][x] = 1 + my_find_min(data.tab[y][x - 1], data.tab[y - 1][x], data.tab[y - 1][x - 1]);
+            }
             if (data.tab[y][x] > res)
                 res = data.tab[y][x];
         }
     }
-    data = replace_by_neg(data, res);
-    return (data);
+    data.tab = replace_by_neg(data, res);
+    return (data.tab);
 }
 
 int bsq(char *dest)
 {
     struct s_list data = get_tab(dest);
-    printf("\n\n\n\n");
-    display_tab(data);
-    printf("\n\n\n\n");
-    data = my_find_bsq(data);
+    data.tab = my_find_bsq(data);
     display_tab(data);
     return (0);
 }
