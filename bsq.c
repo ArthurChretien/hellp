@@ -179,6 +179,7 @@ int bsq(char *dest)
         y++;
     }
     free(data.tab);
+    free(dest);
     return (0);
 }
 
