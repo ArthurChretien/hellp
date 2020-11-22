@@ -19,6 +19,12 @@ SRCS	= bsq.c \
 	  my_putchar.c \
 	  strconc.c \
 	  my_getnbr.c \
+	  display_tab.c \
+	  get_tab.c \
+	  get_xmax.c \
+	  get_ymax.c \
+	  my_find_min.c \
+	  replace_by_neg_bis.c \
 
 OBJS	= $(SRCS:.c=.o)
 
