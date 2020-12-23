@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2020
-** my_getnbr
+** my_get_nbr
 ** File description:
-** 
+** my_get_nbr
 */
 
-int my_getnbr(char const *str)
+int my_get_nbr(char const *str)
 {
     int i = 0;
     int value = 0;

@@ -10,25 +10,31 @@ CC	= gcc
 RM	= rm -f
 
 CFLAGS	+= -I./include
+CFLAGS  += -lcsfml-graphics
 
-NAME	= push_swap
+NAME	= my_screensaver
 
-SRCS	= push_swap.c \
-	  add_at_position.c \
-	  create_cell.c \
-	  list_is_empty.c \
-	  print_list.c \
-	  free_list.c \
-	  my_getnbr.c \
-	  check_arg.c \
-	  swap_l_a.c \
+SRCS	= my_screensaver.c \
+	  my_putstr.c \
+	  my_putchar.c \
+	  my_strcmp.c \
+	  my_usage_h.c \
+	  my_usage_d.c \
+	  arg_check.c \
+	  my_colors.c \
+	  draw_line.c \
+	  my_get_nbr.c \
+	  init_sfml_data.c \
+	  framebuffer_create.c \
+	  clean_all.c \
+	  
 
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(CFLAGS)
 
 clean:
 	$(RM) $(OBJS)
