@@ -26,4 +26,5 @@ int arg_check (int ac, char **av)
     }
     if (arg >= 1 && arg <= 3)
         return (arg);
+    return (84);
 }

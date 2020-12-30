@@ -9,7 +9,7 @@
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
     my_putchar('A');
-    framebuffer_t *buffer = malloc(sizeof(*buffer));
+    framebuffer_t *buffer = malloc(sizeof(framebuffer_t *));
     my_putchar('B');
 
     buffer->width = width;

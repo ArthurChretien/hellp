@@ -8,7 +8,7 @@
 #include "proto.h"
 #include <stdbool.h>
 
-void display_screensaver(int nb)
+int display_screensaver() //int nb)
 {
     sfml_components_t sfml_data;
     sfVideoMode mode = {800, 600, 32};
@@ -27,11 +27,12 @@ void display_screensaver(int nb)
             if (sfml_data.event.type == sfEvtClosed)
                 sfRenderWindow_close(sfml_data.wd);
         }
-        sfColor colors = my_colors(rand(), rand(), rand(), 255);
+        //sfColor colors = my_colors(rand(), rand(), rand(), 255);
         sfRenderWindow_display(sfml_data.wd);
-        draw_line(sfml_data.image, a, b, sfRed);
+        draw_line(sfml_data.image, a, b);
     }
     clean_all(sfml_data.image, sfml_data.sprt, sfml_data.tex, sfml_data.wd);
+    return (0);
 }
 
 int main(int ac, char **av)
@@ -41,6 +42,6 @@ int main(int ac, char **av)
     if (arg_check(ac, av) == 0)
         return (0);
     if (arg_check(ac, av) >= 1 && arg_check(ac, av) <= 3)
-        display_screensaver(arg_check(ac, av));
+        display_screensaver();//arg_check(ac, av));
     return (0);
 }

@@ -12,6 +12,4 @@ void clean_all(framebuffer_t *b, sfSprite *sp, sfTexture *t, sfRenderWindow *wd)
     sfSprite_destroy(sp);
     sfTexture_destroy(t);
     sfRenderWindow_destroy(wd);
-    free(b->pixels);
-    free(b);
 }

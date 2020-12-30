@@ -9,7 +9,7 @@ CC	= gcc
 
 RM	= rm -f
 
-CFLAGS	+= -I./include
+CFLAGS	+= -I./include -Wall -Werror -Wextra
 CFLAGS  += -lcsfml-graphics
 
 NAME	= my_screensaver

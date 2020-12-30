@@ -48,7 +48,7 @@ sfVector2i to, sfColor sfRed)
 }
 
 void draw_line(framebuffer_t *buffer, sfVector2i a,
-sfVector2i b, sfColor colors)
+sfVector2i b)
 {
     if (abs(b.x - a.x) >= abs(b.y - a.y))
         if (b.x >= a.x)
