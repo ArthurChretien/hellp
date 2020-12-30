@@ -6,14 +6,13 @@
 */
 #include "proto.h"
 
-sfml_components_t init_sfml_data(struct sfml_components data)
+sfml_components_t init_sfml_data(struct sfml_components data, sfVideoMode mode)
 {
-    data.mode = {800, 600, 32};
-    data.wd = sfRenderWindow_create(mode, "", sfDefaultStyle, NULL);
+    data.wd = sfRenderWindow_create(mode, "lol", sfDefaultStyle, NULL);
     data.event;
     data.image = framebuffer_create(800, 600);
-    data.texture = sfTexture_create(800, 600);
-    data.sprite = sfSprite_create();
+    data.tex = sfTexture_create(800, 600);
+    data.sprt = sfSprite_create();
 
     return (data);
 }

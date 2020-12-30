@@ -27,7 +27,6 @@ SRCS	= my_screensaver.c \
 	  init_sfml_data.c \
 	  framebuffer_create.c \
 	  clean_all.c \
-	  
 
 OBJS	= $(SRCS:.c=.o)
 

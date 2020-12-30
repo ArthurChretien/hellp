@@ -17,12 +17,11 @@ typedef struct framebuffer {
 } framebuffer_t;
 
 typedef struct sfml_components {
-    sfVideoMode mode;
     sfRenderWindow *wd;
     sfEvent event;
     framebuffer_t *image;
-    sfTexture *texture;
-    sfSprite *sprite;
+    sfTexture *tex;
+    sfSprite *sprt;
 } sfml_components_t;
 
 void my_putstr(char const *str);
@@ -31,12 +30,11 @@ int my_strcmp(char *s1, char *s2);
 int my_usage_h(void);
 int my_usage_d(void);
 int arg_check(int ac, char **av);
-void keep_size(sfEvent event, sfRenderWindow *window, sfView *swap_view, sfFloatRect view_rectangle);
-sfColor my_colors(sfUint8 r, sfUint8 g, sfUint8 b, sfUint8 a);    
-int draw_line(framebuffer_t *buffer, sfVector2i a, sfVector2i b, sfColor colors);
-sfml_components_t init_sfml_data(struct sfml_components data);
+sfColor my_colors(sfUint8 r, sfUint8 g, sfUint8 b, sfUint8 a);
+void draw_line(framebuffer_t *buffer, sfVector2i a, sfVector2i b, sfColor colors);
+sfml_components_t init_sfml_data(struct sfml_components data, sfVideoMode mode);
 void clean_all(framebuffer_t *b, sfSprite *spr, sfTexture *t, sfRenderWindow *wd);
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height);
-void framebuffer_destroy(framebuffer_t* framebuffer);
+void framebuffer_destroy(framebuffer_t *framebuffer);
 int my_put_pixel(framebuffer_t *fb, unsigned int x, unsigned int y, sfColor c);
 int my_get_nbr(char const *str);

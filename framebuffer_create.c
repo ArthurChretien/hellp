@@ -8,19 +8,19 @@
 
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
-    framebuffer_t buffer;
+    my_putchar('A');
+    framebuffer_t *buffer = malloc(sizeof(*buffer));
+    my_putchar('B');
 
-    buffer = malloc(sizeof(*buffer));
-    buffer.width = width;
-    buffer.height = height;
-    buffer_len = width * height * 4;
-    pixels = malloc(sizeof(*pixels) * buffer_len);
-    buffer.pixels = pixels;
+    buffer->width = width;
+    buffer->height = height;
+    buffer->pixels = malloc(width * height * 4);
+    my_putchar('C');
     return (buffer);
 }
 
-void framebuffer_destroy(framebuffer_t framebuffer)
+void framebuffer_destroy(framebuffer_t *framebuffer)
 {
-    free(framebuffer.pixels);
+    free(framebuffer->pixels);
     free(framebuffer);
 }

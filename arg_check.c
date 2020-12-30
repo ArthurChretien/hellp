@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** arg_check.c
 ** File description:
-** 
+** arg_check
 */
 #include "proto.h"
 
