@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
-## 
+## Makefile
 ##
 
 CC	= gcc
@@ -11,22 +11,17 @@ RM	= rm -f
 
 CFLAGS	+= -I./include -Wall -Werror -Wextra
 CFLAGS  += -lcsfml-graphics
+CFLAGS  += -lcsfml-system
 
-NAME	= my_screensaver
+NAME	= my_runner
 
-SRCS	= my_screensaver.c \
-	  my_putstr.c \
-	  my_putchar.c \
-	  my_strcmp.c \
-	  my_usage_h.c \
-	  my_usage_d.c \
+SRCS	= my_runner.c \
+	  usage.c \
 	  arg_check.c \
-	  my_colors.c \
-	  draw_line.c \
-	  my_get_nbr.c \
-	  init_sfml_data.c \
-	  framebuffer_create.c \
-	  clean_all.c \
+	  gameobjects_create.c \
+	  set_game.c \
+	  read_map.c \
+	  util.c \
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -9,32 +9,50 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
+#include <stdio.h>
+#include <SFML/System/Export.h>
+#include <SFML/System/Time.h>
+#include <SFML/System/Types.h>
+#include <SFML/Window.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-typedef struct framebuffer {
-    unsigned int width;
-    unsigned int height;
-    sfUint8 *pixels;
-} framebuffer_t;
+struct s_list {
+    int y_max;
+    int x_max;
+    char **tab;
+};
 
-typedef struct sfml_components {
-    sfRenderWindow *wd;
-    sfEvent event;
-    framebuffer_t *image;
-    sfTexture *tex;
-    sfSprite *sprt;
-} sfml_components_t;
+struct player_t {
+    sfVector2f pos;
+    int width;
+    int height;
+};
 
+typedef struct gameobjects_s {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f pos;
+    sfVector2f dir;
+    sfIntRect rect;
+} gameobjects_t;
+
+sfSprite *set_bg(void);
 void my_putstr(char const *str);
 void my_putchar(char c);
 int my_strcmp(char *s1, char *s2);
-int my_usage_h(void);
-int my_usage_d(void);
-int arg_check(int ac, char **av);
+void usage(void);
+void usage_i(void);
+int arg_check(char **av);
 sfColor my_colors(sfUint8 r, sfUint8 g, sfUint8 b, sfUint8 a);
-void draw_line(framebuffer_t *buffer, sfVector2i a, sfVector2i b);
-sfml_components_t init_sfml_data(struct sfml_components data, sfVideoMode mode);
-void clean_all(framebuffer_t *b, sfSprite *spr, sfTexture *t, sfRenderWindow *wd);
-framebuffer_t *framebuffer_create(unsigned int width, unsigned int height);
-void framebuffer_destroy(framebuffer_t *framebuffer);
-int my_put_pixel(framebuffer_t *fb, unsigned int x, unsigned int y, sfColor c);
 int my_get_nbr(char const *str);
+char *read_file(const int fd);
+int get_xmax(char *dest);
+int get_ymax(char *dest);
+char **get_tab(struct s_list map, char *dest);
+void set_map(char *dest);
+int my_strlen(char *str);
+int my_getnbr(char const *str);
+char *strconc(char *str1, char *str2);
+void display_tab(struct s_list map);

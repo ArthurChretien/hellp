@@ -1,30 +1,21 @@
 /*
-** EPITECH PROJECT, 2020
-** arg_check.c
+** EPITECH PROJECT, 2021
+** arg_check
 ** File description:
 ** arg_check
 */
+
 #include "proto.h"
 
-int arg_check (int ac, char **av)
+int arg_check (char **av)
 {
-    int arg = my_get_nbr(av[1]);
-
-    if (ac != 2) {
-        my_putstr("./my_screensaver: bad arguments:");
-        my_putstr(" 0 given but 1 is required\n");
-        my_putstr("retry with -h\n");
-        return (84);
-    }
     if (my_strcmp(av[1], "-h") == 0) {
-        my_usage_h();
+        usage();
         return (0);
     }
-    if (my_strcmp(av[1], "-d") == 0) {
-        my_usage_d();
+    if (my_strcmp(av[1], "-i") == 0) {
+        usage_i();
         return (0);
     }
-    if (arg >= 1 && arg <= 3)
-        return (arg);
-    return (84);
+    return (1);
 }
