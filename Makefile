@@ -22,6 +22,8 @@ SRCS	= my_runner.c \
 	  set_game.c \
 	  read_map.c \
 	  util.c \
+	  player_pos.c \
+	  init_rect.c \
 
 OBJS	= $(SRCS:.c=.o)
 

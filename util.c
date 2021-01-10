@@ -58,18 +58,16 @@ int my_strlen(char *str)
     return (i);
 }
 
-void display_tab(struct s_list map)
+void display_tab(struct s_list map, struct player_t player)
 {
-    int x = 0;
     int y = 0;
+    char temp = map.tab[(int)player.pos.y][(int)player.pos.x];
 
-    while (y != map.y_max) {
-        x = 0;
-        while (x != map.x_max) {
-            my_putchar(map.tab[y][x]);
-            x++;
-        }
-        my_putchar('\n');
+    map.tab[(int)player.pos.y][(int)player.pos.x] = '0';
+    while (map.tab[y] != NULL) {
+        my_putstr(map.tab[y]);
         y++;
     }
+    map.tab[(int)player.pos.y][(int)player.pos.x] = temp;
+
 }

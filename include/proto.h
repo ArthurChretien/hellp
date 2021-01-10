@@ -18,6 +18,20 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+struct anim_t {
+    int begin_x;
+    int nb_frames;
+    float current_frame;
+    float speed;
+};
+
+struct ground_t {
+    sfIntRect ground_rect;
+    sfVector2f ground_pos;
+    sfTexture *ground_text;
+    sfSprite *ground_sprite;
+};
+
 struct s_list {
     int y_max;
     int x_max;
@@ -28,6 +42,10 @@ struct player_t {
     sfVector2f pos;
     int width;
     int height;
+    int speed;
+    int jump_height;
+    int jump_speed;
+    int hitbox;
 };
 
 typedef struct gameobjects_s {
@@ -55,4 +73,11 @@ void set_map(char *dest);
 int my_strlen(char *str);
 int my_getnbr(char const *str);
 char *strconc(char *str1, char *str2);
-void display_tab(struct s_list map);
+void display_tab(struct s_list map, struct player_t player);
+char **fill_tab(struct s_list, char *dest);
+struct player_t set_player(void);
+int display_game();
+bool check_pos(struct player_t player, struct s_list map);
+struct ground_t set_ground(void);
+struct anim_t set_anim(void);
+sfIntRect init_rect(void);
